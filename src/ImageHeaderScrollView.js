@@ -175,8 +175,17 @@ class ImageHeaderScrollView extends Component<Props, State> {
       extrapolate: this.props.foregroundExtrapolate,
     });
 
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [-1 * (Dimensions.get('window').height - this.props.maxHeight), 0],
+      outputRange: [
+        this.props.maxHeight + (Dimensions.get('window').height - this.props.maxHeight),
+        this.props.maxHeight,
+      ],
+      extrapolate: 'clamp'
+    });
+
     const headerTransformStyle = {
-      height: this.props.maxHeight,
+      height: headerHeight,
       transform: [{ translateY: headerTranslate }],
     };
 
