@@ -7,7 +7,7 @@ declare module "react-native-image-header-scroll-view" {
     }
 
     interface SourceObjectProps {
-        uri?: string,
+        uri?: string;
         bundle?: string;
         method?: string;
         headers?: Dictionary;
