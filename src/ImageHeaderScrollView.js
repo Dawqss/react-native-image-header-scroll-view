@@ -102,7 +102,7 @@ class ImageHeaderScrollView extends Component<Props, State> {
 
   getChildContext() {
     return {
-      scrollY: this.state.scrollY,
+      scrollY: new Animated.Value(0),
       scrollPageY: this.state.pageY + this.props.minHeight,
     };
   }
@@ -296,11 +296,9 @@ class ImageHeaderScrollView extends Component<Props, State> {
           ]}
           style={[styles.container, style]}
           onScroll={
-            useNativeDriver
-              ? Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }], {
-                  useNativeDriver: true,
-                })
-              : this.onScroll
+            Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }], {
+              useNativeDriver: this.props.useNativeDriver
+            })
           }
         />
         {this.renderTouchableFixedForeground()}
